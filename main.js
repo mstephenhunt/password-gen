@@ -63,3 +63,51 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
+function buildPassword(options) {
+    const passwordWordLength = options.passwordWordLength || 3
+    const minWordLength = options.minWordLength || 1
+    const maxWordLength = options.maxWordLength || 100
+    const wordEntries = options.wordEntries || 2
+    const selectedSeperators = options.selectedSeperators || ['spaces']
+
+    var password = ''
+    var numberOfWords = 1
+    while (true) {
+        // First grab a word
+        var newWord = buildWord(minWordLength, maxWordLength, wordEntries)
+
+        password += newWord
+
+        if (numberOfWords == passwordWordLength) {
+            // If you're at the end, just return
+            return password
+        } else {
+            // Otherwise attach a seperator
+
+            // Grab a random seperator
+            const seperator = getRandomSeperator(selectedSeperators)
+
+            password += seperator
+        }
+
+        numberOfWords++
+    }
+}
+
+const pass = buildPassword({
+    passwordWordLength: 3,
+    wordEntries: 3
+})
+
+console.log(pass)
+
+
+
+
+
+
+
+
+
+
+
