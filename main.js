@@ -59,8 +59,22 @@ function getRandomSeperator(selectedSeperators) {
     }
 }
 
+function getRandomTerminator() {
+    return terminators[getRandomInt(terminators.length)]
+}
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
+}
+
+function makeSentence(password) {
+    // Captilize the first letter
+    var sentence = password.charAt(0).toUpperCase() + password.slice(1)
+
+    // Add a random terminator
+    sentence += getRandomTerminator()
+
+    return sentence
 }
 
 function buildPassword(options) {
@@ -69,6 +83,7 @@ function buildPassword(options) {
     const maxWordLength = options.maxWordLength || 100
     const wordEntries = options.wordEntries || 2
     const selectedSeperators = options.selectedSeperators || ['spaces']
+    const sentence = options.sentence || false
 
     var password = ''
     var numberOfWords = 1
@@ -80,6 +95,11 @@ function buildPassword(options) {
 
         if (numberOfWords == passwordWordLength) {
             // If you're at the end, just return
+
+            // If your password is a sentence, uppercase the first word and
+            // add terminator at the end
+            password = makeSentence(password)
+
             return password
         } else {
             // Otherwise attach a seperator
