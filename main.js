@@ -2,6 +2,7 @@ const consonants = ['b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 
 const vowels = ['a', 'a', 'e', 'e', 'i', 'i', 'a', 'o', 'o', 'u', 'o', 'oi', 'ow', 'a', 'air', 'a', 'ir', 'aw', 'ear', 'ure', 'ai', 'ai', 'ea', 'ee', 'e', 'y', 'ho', 'oa', 'oo', 'o', 'oo', 'oy', 'ou', 'er', 'are', 'er', 'a', 'eer', 'our', 'au', 'eigh', 'u', 'ea', 'o', 'igh', 'au', 'u,ou', 'oo', 'ew', 'uoy', 'ough', 'i', 'ear', 'ur', 'or', 'ere', 'aigh', 'ie', 'y', 'u', 'ie', 'aw', 'oe', 'ou', 'ue', 'ar', 'ere', 'ear', 'oor', 'ier', 'ay', 'ai', 'ey', 'ui', 'uy', 'ough', 'ow', 'our', 'eir', 'or', 'ore', 'er', 'a', 'oe', 'y', 'ye', 'ough', 'oe', 'ur', 'ayer', 'our', 'oar', 'et', 'eo', 'ie', 'ie', 'ai', 'eau', 'ough', 'yr', 'our', 'ei', 'ei', 'i', 'is', 'oo', 'ui', 'augh', 'au', 'ae', 'ei', 'eigh', 'ew', 'oew', 'ar', 'eo', 'ou', 'ough', 'ea', 'ay', 'au']
 const symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', '{', '}', '', '|', '/', '?', ',', '.', '<', '>']
 const terminators = ['.', '?', '!']
+const seperators = ['spaces', 'numbers', 'symbols']
 
 function buildWord(minLen, maxLen, wordEntries) {
     // Return an alternating set of consonants and vowels until you hit the correct length
@@ -43,6 +44,19 @@ function getRandomConsonant() {
 
 function getRandomVowel() {
     return vowels[getRandomInt(vowels.length)]
+}
+
+function getRandomSeperator(selectedSeperators) {
+    // Grab a random seperator type
+    const seperatorType = seperators[getRandomInt(selectedSeperators.length)]
+
+    if (seperatorType == 'spaces') {
+        return ' '
+    } else if (seperatorType == 'numbers') {
+        return getRandomInt(10)
+    } else {
+        return symbols[getRandomInt(symbols.length)]
+    }
 }
 
 function getRandomInt(max) {
